@@ -1,9 +1,10 @@
+import UserController from './user/user.controller'
 
 export interface ApiRoute {
     path: string;
-    controller: any;
+    controller: never;
 }
 
 export default [
-	// TODO: Agregar nuevas rutas de endpoints
+    { path: '/user', controller: UserController }
 ] as ApiRoute[];
