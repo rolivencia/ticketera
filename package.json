@@ -4,6 +4,7 @@
 	"engines": {
 		"node": ">=20.11.0 <21.0.0"
 	},
+	"type": "module",
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
 		"dev": "concurrently -p --names=\"Server build,Frontend app,Server app\" --prefix-colors=\"yellow,red,green\" \"pnpm run build:watch\" \"pnpm run serve:frontend\" \"pnpm run serve:backend\"\n",
@@ -16,7 +17,9 @@
 		"test": "nx test",
 		"test:watch": "nx test --watch",
 		"sanity:dev": "cd cms && sanity dev",
-		"prepare": "husky"
+		"prepare": "husky",
+		"create-migrations": "pnpm drizzle-kit generate:pg",
+		"run-migrations": "pnpm tsx --env-file=.env run-migrations.ts"
 	},
 	"private": true,
 	"dependencies": {
@@ -95,6 +98,7 @@
 		"tailwindcss": "^3.4.1",
 		"ts-jest": "29.1.0",
 		"ts-node": "10.9.1",
+		"tsx": "^4.8.2",
 		"typescript": "5.4.4",
 		"webpack": "^5.64.0"
 	}
