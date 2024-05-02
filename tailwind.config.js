@@ -8,6 +8,16 @@ module.exports = {
 		colors: {
 			white: '#fff',
 			black: '#000',
+			'primary': '#0d6efd',
+			'primary-dark': '#031633',
+			'success': '#198754',
+			'success-dark': '#051b11',
+			'danger': '#dc3545',
+			'danger-dark': '#2c0b0e',
+			'warning': '#ffc107',
+			'warning-dark': '#332701',
+			'info': '#0dcaf0',
+			'info-dark': '#032830',
 			'primary-100': 'hsl(9, 70%, 96%)',
 			'primary-200': 'hsl(11, 78%, 93%)',
 			'primary-300': 'hsl(24, 45%, 76%)',
@@ -50,7 +60,6 @@ module.exports = {
 			},
 			fontFamily: {
 				inter: ['Inter', 'sans-serif'],
-				'source-serif': ['Source Serif Pro', 'sans-serif'],
 			},
 			spacing: {
 				4.5: '18px',
