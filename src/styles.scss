@@ -1,0 +1,9 @@
+// Imports de estilos globales
+@use 'assets/scss/reset' as *;
+@use 'assets/scss/typography' as *;
+@use 'assets/scss/theme' as *;
+
+// Imports de Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
