@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 				<div class="text-left">18/05/2024 <br> 23:59</div>
 				<div class="text-right"><span class="font-bold">Casa Grande</span><br>Belgrano 3298, Santa Fe</div>
 			</div>
-			<img class="qr mx-auto" src="https://qrcg-free-editor.qr-code-generator.com/main/assets/images/websiteQRCode_noFrame.png" alt="">
+			<img class="w-[250px] mx-auto" src="https://qrcg-free-editor.qr-code-generator.com/main/assets/images/websiteQRCode_noFrame.png" alt="">
 			<p class="text-2xl font-bold">TSCHOPP, Juan Blas</p>
 			<p class="text-2xl font-bold">42530052</p>
 			<button class="flex w-full mt-5 bg-success hover:bg-success-dark text-white font-bold py-2 px-4 rounded drop-shadow justify-center">
