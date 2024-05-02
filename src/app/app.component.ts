@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 	standalone: true,
 	selector: 'ticketera-root',
 	template: `
-		¡EXITO!
 		<div class="mx-5 my-0 min-h-screen md:m-auto md:max-w-screen-lg">
 			<router-outlet />
 		</div>
