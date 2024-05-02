@@ -5,10 +5,9 @@ export interface EnvironmentConfig {
 	};
 }
 
-// TODO: Agregar string de conexión a la base de datos
 export const environment: EnvironmentConfig = {
 	production: true,
 	database: {
-		connectionString: ''
+		connectionString: process.env['PG_CONNECTION_STRING'] as string,
 	},
 };
