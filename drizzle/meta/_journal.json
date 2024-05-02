@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1714618169061,
+      "tag": "0000_greedy_captain_universe",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1714619143095,
+      "tag": "0001_nostalgic_the_professor",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1714619297952,
+      "tag": "0002_harsh_ezekiel_stane",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1714619723989,
+      "tag": "0003_old_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1714619870570,
+      "tag": "0004_windy_terror",
+      "breakpoints": true
+    }
+  ]
+}
