@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from "./components/header/header.component";
 
 @Component({
-	standalone: true,
-	selector: 'ticketera-root',
-	template: `
-		¡EXITO!
-		<div class="mx-5 my-0 min-h-screen md:m-auto md:max-w-screen-lg">
+    standalone: true,
+    selector: 'ticketera-root',
+    template: `
+		<ticketera-header></ticketera-header>
+		<div class="mx-5 md:max-w-screen-lg max-w-screen-lg px-4 py-4 sm:px-6 sm:py-8 lg:px-8">
 			<router-outlet />
 		</div>
 	`,
-	imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, HeaderComponent]
 })
 export class AppComponent {
-	constructor() {
-	}
+	
 }
