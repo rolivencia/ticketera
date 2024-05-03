@@ -8,6 +8,7 @@
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
 		"postinstall": "pnpm run run-migrations",
+		"start": "node dist/ticketera/server/server.mjs",
 		"dev": "concurrently -p --names=\"Server build,Frontend app,Server app\" --prefix-colors=\"yellow,red,green\" \"pnpm run build:watch\" \"pnpm run serve:frontend\" \"pnpm run serve:backend\"\n",
 		"serve:frontend": "nx run ticketera:serve:development",
 		"serve:backend": "node -r ts-node/register --watch-path=./dist/ticketera/server --env-file=.env dist/ticketera/server/server.mjs",
