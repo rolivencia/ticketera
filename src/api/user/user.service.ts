@@ -8,19 +8,18 @@ const db = drizzle(pgClient, { schema: { ...schemas } });
 export async function getById(id: number) {
     return db.query.user.findFirst({ where: eq(schemas.user.id, id) })
 }
-/*
-export async function create(user: any) {
-    const newUser: typeof user = {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        userName: user.userName,
-        email: user.email,
+
+export async function create({ firstName, lastName, userName, email }: any) {
+    const newUser = {
+        firstName: firstName,
+        lastName: lastName,
+        userName: userName,
+        email: email,
         createdAt: new Date(),
         updatedAt: new Date(),
         enabled: false,
         deleted: false
     };
 
-    await db.insert.user(newUser);
+    await db.insert(schemas.user).values(newUser);
 }
-*/
