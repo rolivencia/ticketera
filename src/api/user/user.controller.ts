@@ -5,6 +5,7 @@ const router = Router()
 
 router.get('/:id', getById)
 router.post('/', create)
+router.post('/createUserAndSeller', createUserAndSeller)
 
 export default router
 
@@ -18,6 +19,13 @@ function getById(req: Request, res: Response, next: NextFunction) {
 function create(req: Request, res: Response, next: NextFunction){
     const userCreateData = req.body;
     userService.create(userCreateData)
+        .then(() => res.status(201).send('User created succesfully'))
+        .catch((err) => next(err));
+}
+
+function createUserAndSeller(req: Request, res: Response, next: NextFunction){
+    const userCreateData = req.body;
+    userService.createUserAndSeller(userCreateData)
         .then(() => res.status(201).send('User created succesfully'))
         .catch((err) => next(err));
 }
