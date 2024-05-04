@@ -17,7 +17,6 @@ function getById(req: Request, res: Response, next: NextFunction) {
 
 function create(req: Request, res: Response, next: NextFunction){
     const userCreateData = req.body;
-    console.log(req.body)
     userService.create(userCreateData)
         .then(() => res.status(201).send('User created succesfully'))
         .catch((err) => next(err));
