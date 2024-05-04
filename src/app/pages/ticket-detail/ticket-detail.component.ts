@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Ticket } from '../../interfaces/ticket.model';
+import { TicketService } from 'src/app/providers/ticket.service';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
 	selector: 'ticketera-ticket-detail',
@@ -28,4 +32,19 @@ import { CommonModule } from '@angular/common';
 	`,
 	styleUrl: './ticket-detail.component.scss',
 })
-export class TicketDetailComponent {}
+export class TicketDetailComponent{
+	ticket: Ticket | undefined;
+
+	constructor(private ticketService: TicketService, private route: ActivatedRoute){
+		
+		this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+			//const id = params.get('id');
+			//if(id){
+				this.ticketService.getTicketByID(3).subscribe((ticket) => {
+					this.ticket=ticket;
+				})
+			//}
+		}
+	)}
+
+}
