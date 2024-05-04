@@ -7,7 +7,7 @@ import { Ticket } from '../interfaces/ticket.model';
   providedIn: 'root'
 })
 export class TicketService {
-  private readonly prefix = `localhost:4000/api/ticket`;
+  private readonly prefix = `http://localhost:4000/api/ticket`;
 
   constructor(private http: HttpClient){}
 
