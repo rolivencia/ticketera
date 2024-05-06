@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
 	standalone: true,
@@ -14,6 +13,5 @@ import { AuthService } from '@auth0/auth0-angular';
 		</div>
 	`,
 	imports: [CommonModule, RouterModule, HeaderComponent],
-	providers: [AuthService],
 })
 export class AppComponent {}
