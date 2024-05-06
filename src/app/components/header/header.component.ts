@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
 	selector: 'ticketera-header',
@@ -7,16 +8,21 @@ import { CommonModule } from '@angular/common';
 	imports: [CommonModule],
 	template: `
 		<header class="bg-primary-dark">
-			<div class="mx-5 md:max-w-screen-lg max-w-screen-lg px-4 py-4 sm:px-6 sm:py-8 lg:px-8">
-				<h1 class="text-white font-bold text-2xl">GUALICHO TICKETS</h1>
+			<div class="mx-5 max-w-screen-lg px-4 py-4 sm:px-6 sm:py-8 md:max-w-screen-lg lg:px-8">
+				<h1 class="text-2xl font-bold text-white">GUALICHO TICKETS</h1>
 			</div>
 		</header>
 		<div class="bg-primary text-white">
-			<div class="mx-5 md:max-w-screen-lg max-w-screen-lg px-4 py-2 sm:px-6 sm:py-4 lg:px-8 grid grid-cols-2 content-center">
-				<div class="text-xl content-center">Hola, Lautaro!</div>
+			<div
+				class="mx-5 grid max-w-screen-lg grid-cols-2 content-center px-4 py-2 sm:px-6 sm:py-4 md:max-w-screen-lg lg:px-8"
+			>
+				<div class="content-center text-xl">Hola, Lautaro!</div>
 				<div class="flex justify-end">
-					<button class="bg-danger hover:bg-danger-dark text-white font-bold py-2 px-4 rounded flex">
-						<span class="">CERRAR SESIÓN</span> <img class="h-5 ml-1" src="/assets/img/icons/logout.svg" alt="">
+					<button
+						(click)="onLogoutButtonClicked()"
+						class="bg-danger hover:bg-danger-dark flex rounded px-4 py-2 font-bold text-white"
+					>
+						<span class="">CERRAR SESIÓN</span> <img class="ml-1 h-5" src="/assets/img/icons/logout.svg" alt="" />
 					</button>
 				</div>
 			</div>
@@ -24,4 +30,9 @@ import { CommonModule } from '@angular/common';
 	`,
 	styles: ``,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+	auth0Service = inject(AuthService);
+	onLogoutButtonClicked() {
+		this.auth0Service.logout();
+	}
+}
