@@ -3,9 +3,9 @@ import * as ticketService from './ticket.service'
 
 const router = Router()
 
-router.get('/:id', getById)
-router.get('/getAll', getAll)
 router.post('/', create)
+router.get('/:id', getById)
+router.get('/', getAll)
 
 export default router
 

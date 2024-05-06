@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ticket } from '../interfaces/ticket.model';
 
@@ -7,11 +7,15 @@ import { Ticket } from '../interfaces/ticket.model';
   providedIn: 'root'
 })
 export class TicketService {
-  private readonly prefix = `http://localhost:4000/api/ticket`;
 
-  constructor(private http: HttpClient){}
+  private http = inject(HttpClient);
+  private readonly prefix = `http://localhost:4200/api/ticket`;
 
-  public getTicketByID(id:number): Observable<Ticket>{
+  getTicketByID(id:number): Observable<Ticket>{
     return this.http.get<Ticket>(`${this.prefix}/${id}`)
+  }
+
+  getAllTickets(): Observable<Ticket[]>{
+    return this.http.get<Ticket[]>(`${this.prefix}`)
   }
 }
