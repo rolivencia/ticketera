@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 
-const ROUTE_TREE = {
+export const ROUTE_TREE = {
 	DASHBOARD: 'dashboard',
 	TICKET_ADD: 'ticket-add',
 	TICKET_DETAIL: 'ticket-detail',

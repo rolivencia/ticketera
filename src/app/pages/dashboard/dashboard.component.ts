@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketService } from '../../providers/ticket.service'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { RouterLink } from '@angular/router'
+import { ROUTE_TREE } from '../../app.routes'
 
 @Component({
 	selector: 'ticketera-dashboard',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [ CommonModule, RouterLink ],
 	template: `
 		@if(tickets$ | async; as tickets){
 		<div class="m-5 grid rounded bg-white p-5 text-center drop-shadow">
@@ -31,7 +33,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 						<td class="whitespace-nowrap px-4 py-5 font-medium text-gray-900">#{{ ticket.id }}</td>
 						<td class="whitespace-nowrap px-4 py-5 text-gray-700">{{ ticket.lastName }}, {{ ticket.firstName }}</td>
 						<td class="flex justify-between whitespace-nowrap px-4 py-5">
-							<img class="h-5" src="/assets/img/icons/qr-code.svg" alt="" />
+							<a [routerLink]="['..', appRoute.TICKET_DETAIL, ticket.id]"><img class="h-5" src="/assets/img/icons/qr-code.svg" alt=""/></a>
 							<img class="h-5" src="/assets/img/icons/whatsapp.svg" alt="" />
 						</td>
 					</tr>
@@ -48,6 +50,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 	styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
+
+	appRoute = ROUTE_TREE;
+
 	private ticketService = inject(TicketService);
 	tickets$ = this.ticketService.getAllTickets().pipe(takeUntilDestroyed());
 }
