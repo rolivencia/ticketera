@@ -13,6 +13,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es-419';
 import { registerLocaleData } from '@angular/common';
+import { provideAuth0 } from '@auth0/auth0-angular';
 registerLocaleData(localeEs);
 
 export const appConfig: ApplicationConfig = {
@@ -27,5 +28,12 @@ export const appConfig: ApplicationConfig = {
 			withViewTransitions(),
 		),
 		provideHttpClient(withFetch()),
+		provideAuth0({
+			domain: 'dev-0wyaah0g.us.auth0.com',
+			clientId: 'fGmUVfnWUFq1uQrtWlvdfzd2abbZyoed',
+			authorizationParams: {
+				redirect_uri: 'http://localhost:4200',
+			},
+		}),
 	],
 };
