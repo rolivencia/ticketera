@@ -5,6 +5,7 @@ const router = Router()
 
 router.get('/:id', getById)
 router.get('/getAll', getAll)
+router.post('/', create)
 
 export default router
 
@@ -19,4 +20,11 @@ function getAll(req: Request, res: Response, next: NextFunction) {
     ticketService.getAll()
         .then((tickets) => res.status(200).json(tickets))
         .catch((err) => next(err))
+}
+
+function create(req: Request, res: Response, next: NextFunction) {
+    const ticketCreateData = req.body;
+    ticketService.create(ticketCreateData)
+        .then(() => res.status(201).send('Ticket created succesfully'))
+        .catch((err) => next(err));
 }

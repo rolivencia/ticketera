@@ -59,7 +59,7 @@ export async function createUserAndSeller({ firstName, lastName, userName, email
     
     const result = await db.transaction(async (trx) => {
         const userInsertResult = await trx.insert(schemas.user).values(newUser).returning();
-        if(userInsertResult.length === 0){throw new Error('user cannot be created')};
+        if(userInsertResult.length === 0){throw new Error('user cannot be created')}
         newSeller.idUser = userInsertResult[0].id;
         await trx.insert(schemasS.seller).values(newSeller);
     })

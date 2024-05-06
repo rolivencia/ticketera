@@ -12,3 +12,22 @@ export async function getById(id: number) {
 export async function getAll() {
     return db.query.ticket.findMany();
 }
+export async function create({ cost, firstName, lastName, qrString, email, phone, dni, createdBy }: any) {
+    const newTicket = {
+        cost: cost,
+        firstName: firstName,
+        lastName: lastName,
+        qrString: qrString,
+        email: email,
+        phone: phone,
+        dni: dni,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        enabled: false,
+        deleted: false,
+        createdBy: createdBy
+    }
+
+    const res = await db.insert(schemas.ticket).values(newTicket).returning();
+    return res;
+}
