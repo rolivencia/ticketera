@@ -6,11 +6,14 @@ import { dirname, join, resolve } from 'node:path';
 import bootstrap from './main.server';
 import cors from 'cors';
 import routes from './api/routes';
+import bodyParser from 'body-parser'
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
 	const server = express();
 
+	server.use(bodyParser.urlencoded({ extended: false }));
+	server.use(bodyParser.json());
 	// Habilita CORS en ambiente development
 	server.use(
 		cors({
