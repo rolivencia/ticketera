@@ -9,6 +9,10 @@ export async function getById(id: number) {
     return db.query.ticket.findFirst({ where: eq(schemas.ticket.id, id) })
 }
 
+export async function getByQRString(qrString: string) {
+    return db.query.ticket.findFirst({ where: eq(schemas.ticket.qrString, qrString) })
+}
+
 export async function getAll() {
     return db.query.ticket.findMany();
 }
