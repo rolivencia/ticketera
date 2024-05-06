@@ -12,12 +12,12 @@ export async function getById(id: number) {
 export async function getAll() {
     return db.query.ticket.findMany();
 }
-export async function create({ cost, firstName, lastName, qrString, email, phone, dni, createdBy }: any) {
+export async function create({ cost, firstName, lastName, email, phone, dni, createdBy }: any) {
     const newTicket = {
         cost: cost,
         firstName: firstName,
         lastName: lastName,
-        qrString: qrString,
+        qrString: crypto.randomUUID(),
         email: email,
         phone: phone,
         dni: dni,
