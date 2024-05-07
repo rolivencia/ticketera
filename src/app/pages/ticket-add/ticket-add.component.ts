@@ -136,7 +136,7 @@ export class TicketAddComponent implements OnInit {
 
 			this.ticketService.createTicket(tk).pipe(first()).subscribe({
 				next: (response) => {
-					const createdTicketID = response[0].id;
+					const createdTicketID = response.id;
 					this.router.navigate([`/ticket-detail/${createdTicketID}`]);
 				},
 				error: (error) => {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { Ticket } from '../interfaces/ticket.model';
 
 @Injectable({
@@ -20,6 +20,8 @@ export class TicketService {
   }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(`${this.prefix}`, ticket)
+    return this.http
+        .post<Ticket[]>(`${this.prefix}`, ticket)
+        .pipe(map((result => result[0])))
   }
 }
