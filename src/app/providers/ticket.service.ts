@@ -19,7 +19,7 @@ export class TicketService {
     return this.http.get<Ticket[]>(`${this.prefix}`)
   }
 
-  createTicket(ticket: Ticket): Observable<Ticket[]> {
-    return this.http.post<Ticket[]>(`${this.prefix}`, ticket)
+  createTicket(ticket: Ticket): Observable<Ticket> {
+    return this.http.post<Ticket>(`${this.prefix}`, ticket)
   }
 }
