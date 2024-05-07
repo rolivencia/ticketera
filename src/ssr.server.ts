@@ -6,11 +6,14 @@ import { dirname, join, resolve } from 'node:path';
 import bootstrap from './main.server';
 import cors from 'cors';
 import routes from './api/routes';
+import bodyParser from 'body-parser'
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
 	const server = express();
 
+	server.use(bodyParser.urlencoded({ extended: false }));
+	server.use(bodyParser.json());
 	// Habilita CORS en ambiente development
 	server.use(
 		cors({
@@ -62,16 +65,12 @@ export function app(): express.Express {
 }
 
 function run(): void {
-	const port = process.env['PORT'] || 4000;
+	const port = process.env['PORT'] || 4200;
 
 	// Start up the Node server
 	const server = app();
 	server.listen(port, () => {
-		console.log(`Aplicación en modo Server-Side Rendering corriendo en http://localhost:${port}`);
-
-		if (port === 4000) {
-			console.log(`Aplicación en modo Client-Side Rendering corriendo en  http://localhost:4200`);
-		}
+		console.log(`Aplicación corriendo en http://localhost:${port}`);
 	});
 }
 
