@@ -20,24 +20,13 @@ export const appRoutes: Routes = [
 				path: ROUTE_TREE.TICKET_ADD,
 				loadComponent: () => import('./pages/ticket-add/ticket-add.component').then((m) => m.TicketAddComponent),
 			},
-			// TODO: Eliminar la ruta generica
-			{
-				path: ROUTE_TREE.TICKET_DETAIL,
-				loadComponent: () =>
-					import('./pages/ticket-detail/ticket-detail.component').then((m) => m.TicketDetailComponent),
-			},
 			{
 				path: `${ROUTE_TREE.TICKET_DETAIL}/:id`,
 				loadComponent: () =>
 					import('./pages/ticket-detail/ticket-detail.component').then((m) => m.TicketDetailComponent),
 			},
 			{
-				path: ROUTE_TREE.TICKET_VIEW,
-				loadComponent: () =>
-					import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
-			},
-			{
-				path: `${ROUTE_TREE.TICKET_VIEW}/:string`,
+				path: `${ROUTE_TREE.TICKET_VIEW}/:uuid`,
 				loadComponent: () =>
 					import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
 			},

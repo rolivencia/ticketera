@@ -15,8 +15,8 @@ export class TicketService {
     return this.http.get<Ticket>(`${this.prefix}/${id}`)
   }
 
-  getTicketByQRString(qrString: string): Observable<Ticket>{
-    return this.http.get<Ticket>(`${this.prefix}/getByQRString/${qrString}`)
+  getTicketByUUID(uuid: string): Observable<Ticket>{
+    return this.http.get<Ticket>(`${this.prefix}/uuid/${uuid}`)
   }
 
   getAllTickets(): Observable<Ticket[]>{

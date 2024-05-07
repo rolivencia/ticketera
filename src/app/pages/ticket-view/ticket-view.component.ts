@@ -33,11 +33,9 @@ import { switchMap } from 'rxjs'
 export class TicketViewComponent {
   private route = inject(ActivatedRoute)
 	private ticketService = inject(TicketService)
-/*
-  ticket$ = this.ticketService.getTicketByQRString('d2e96113-491f-4c67-a873-3e6b88d7c7e5');
-  
+ 
 	ticket$ = 		this.route.params.pipe(
 		takeUntilDestroyed(),
-		switchMap(({ string }) => this.ticketService.getTicketByQRString(string))
-	);*/
+		switchMap(({ uuid }) => this.ticketService.getTicketByUUID(uuid))
+	);
 }
