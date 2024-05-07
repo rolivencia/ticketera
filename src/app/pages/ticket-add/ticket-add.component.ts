@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TicketService } from 'src/app/providers/ticket.service';
 import { Ticket } from 'src/app/interfaces/ticket.model';
 import { Router } from '@angular/router';
-import { error } from 'console';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { first } from 'rxjs'
 
 @Component({
 	selector: 'ticketera-ticket-add',
 	standalone: true,
 	imports: [CommonModule, ReactiveFormsModule],
+	providers: [TicketService],
 	template: `
 		<div class="m-5 grid rounded bg-white p-5 drop-shadow">
 			<p class="text-xl font-bold">Nueva Entrada</p>
@@ -102,10 +103,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class TicketAddComponent implements OnInit {
 	ticketForm!: FormGroup;
 
-	constructor(private fb: FormBuilder, private ts: TicketService, private router: Router) {}
+	private formBuilder = inject(FormBuilder);
+	private router = inject(Router);
+	private ticketService = inject(TicketService);
 
 	ngOnInit(): void {
-		this.ticketForm = this.fb.group({
+		this.ticketForm = this.formBuilder.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
 			dni: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
@@ -130,8 +133,8 @@ export class TicketAddComponent implements OnInit {
 				enabled: false,
 				deleted: false
 			}
-			
-			this.ts.createTicket(tk).pipe(takeUntilDestroyed()).subscribe({
+
+			this.ticketService.createTicket(tk).pipe(first()).subscribe({
 				next: (response) => {
 					const createdTicketID = response[0].id;
 					this.router.navigate([`/ticket-detail/${createdTicketID}`]);
@@ -140,7 +143,7 @@ export class TicketAddComponent implements OnInit {
 					console.error('Error al crear el ticket', error);
 				}
 			})
-			
+
 		}
 	}
 }
