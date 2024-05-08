@@ -1,49 +1,63 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
 import { TicketService } from 'src/app/providers/ticket.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs'
+import { switchMap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'ticketera-ticket-detail',
 	standalone: true,
 	imports: [CommonModule, QRCodeModule],
 	template: `
-		@if(ticket$ | async; as ticket){
+		@if (ticket$ | async; as ticket) {
 			<div class="m-5 grid rounded bg-white p-5 text-center drop-shadow">
 				<div class="flex justify-between">
-					<p class="font-bold text-xl">GUALICHO FEST</p>
+					<p class="text-xl font-bold">GUALICHO FEST</p>
 					<span class="whitespace-nowrap rounded-full bg-gray-100 px-2.5 py-0.5 text-sm text-gray-700">
 						Entrada #{{ ticket?.id }}
 					</span>
 				</div>
-				<div class="grid grid-cols-2 mt-5">
-					<div class="text-left">18/05/2024 <br> 23:59</div>
-					<div class="text-right"><span class="font-bold">Casa Grande</span><br>Belgrano 3298, Santa Fe</div>
+				<div class="mt-5 grid grid-cols-2">
+					<div class="text-left">
+						18/05/2024 <br />
+						23:59
+					</div>
+					<div class="text-right"><span class="font-bold">Casa Grande</span><br />Belgrano 3298, Santa Fe</div>
 				</div>
-				<qrcode class="mx-auto" [qrdata]="ticket.qrString" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+				<qrcode [qrdata]="ticket.qrString" [width]="256" [errorCorrectionLevel]="'M'" class="mx-auto"></qrcode>
 				<p class="text-2xl font-bold">{{ ticket?.lastName?.toUpperCase() }}, {{ ticket?.firstName }}</p>
 				<p class="text-2xl font-bold">{{ ticket?.dni }}</p>
-				<a href="https://api.whatsapp.com/send/?phone=549{{ticket.phone}}&text=Tu+entrada+para+%2AGUALICHO+FEST%2A%0A%0ALink%3A+http://localhost:4200/ticket-view/{{ticket.qrString}}&type=phone_number&app_absent=0" target="_blank">
-					<button class="flex w-full mt-5 bg-success hover:bg-success-dark text-white font-bold py-2 px-4 rounded drop-shadow justify-center">
-						<img class="h-5 mr-1" src="/assets/img/icons/whatsapp-white.svg" alt="" />
+				<a
+					href="https://api.whatsapp.com/send/?phone=549{{
+						ticket.phone
+					}}&text=Tu+entrada+para+%2AGUALICHO+FEST%2A%0A%0ALink%3A+{{ environment.redirectUri }}/ticket-view/{{
+						ticket.qrString
+					}}&type=phone_number&app_absent=0"
+					target="_blank"
+				>
+					<button
+						class="mt-5 flex w-full justify-center rounded bg-success px-4 py-2 font-bold text-white drop-shadow hover:bg-success-dark"
+					>
+						<img class="mr-1 h-5" src="/assets/img/icons/whatsapp-white.svg" alt="" />
 						<span>ENVIAR POR WHATSAPP</span>
-          			</button>
-        		</a>
+					</button>
+				</a>
 			</div>
 		}
-		
 	`,
 	styleUrl: './ticket-detail.component.scss',
 })
 export class TicketDetailComponent {
-	private route = inject(ActivatedRoute)
-	private ticketService = inject(TicketService)
+	readonly environment = environment;
 
-	ticket$ = 		this.route.params.pipe(
+	private route = inject(ActivatedRoute);
+	private ticketService = inject(TicketService);
+
+	ticket$ = this.route.params.pipe(
 		takeUntilDestroyed(),
-		switchMap(({ id }) => this.ticketService.getTicketByID(id))
+		switchMap(({ id }) => this.ticketService.getTicketByID(id)),
 	);
 }
