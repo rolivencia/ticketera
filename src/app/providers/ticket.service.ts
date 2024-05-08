@@ -9,7 +9,7 @@ import { Ticket } from '../interfaces/ticket.model';
 export class TicketService {
 
   private http = inject(HttpClient);
-  private readonly prefix = `http://localhost:4200/api/ticket`;
+  private readonly prefix = `/api/ticket`;
 
   getTicketByID(id:number): Observable<Ticket>{
     return this.http.get<Ticket>(`${this.prefix}/${id}`)
