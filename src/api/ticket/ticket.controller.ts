@@ -5,6 +5,7 @@ const router = Router()
 
 router.post('/', create)
 router.get('/:id', getById)
+router.get('/uuid/:uuid', getByUUID)
 router.get('/', getAll)
 
 export default router
@@ -12,6 +13,13 @@ export default router
 function getById(req: Request, res: Response, next: NextFunction) {
     const idTicket = parseInt(req.params['id'])
     ticketService.getById(idTicket)
+        .then((ticket => res.status(200).json(ticket)))
+        .catch((err) => next(err))
+}
+
+function getByUUID(req: Request, res: Response, next: NextFunction) {
+    const {uuid} = req.params;
+    ticketService.getByUUID(uuid)
         .then((ticket => res.status(200).json(ticket)))
         .catch((err) => next(err))
 }

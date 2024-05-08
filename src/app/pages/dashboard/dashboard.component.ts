@@ -34,6 +34,7 @@ import { ROUTE_TREE } from '../../app.routes'
 						<td class="whitespace-nowrap px-4 py-5 text-gray-700">{{ ticket.lastName }}, {{ ticket.firstName }}</td>
 						<td class="flex justify-between whitespace-nowrap px-4 py-5">
 							<a [routerLink]="['..', appRoute.TICKET_DETAIL, ticket.id]"><img class="h-5" src="/assets/img/icons/qr-code.svg" alt=""/></a>
+							<a [routerLink]="['..', appRoute.TICKET_VIEW, ticket.qrString]"><img class="h-5" src="/assets/img/icons/ticket.svg" alt=""/></a>
 							<img class="h-5" src="/assets/img/icons/whatsapp.svg" alt="" />
 						</td>
 					</tr>

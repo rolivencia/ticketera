@@ -9,9 +9,14 @@ export async function getById(id: number) {
     return db.query.ticket.findFirst({ where: eq(schemas.ticket.id, id) })
 }
 
+export async function getByUUID(uuid: string) {
+    return db.query.ticket.findFirst({ where: eq(schemas.ticket.qrString, uuid) })
+}
+
 export async function getAll() {
     return db.query.ticket.findMany();
 }
+
 export async function create({ cost, firstName, lastName, email, phone, dni, createdBy }: any) {
     const newTicket = {
         cost: cost,
