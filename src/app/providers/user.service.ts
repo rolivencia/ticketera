@@ -11,7 +11,7 @@ import { User } from '../interfaces/user.interface'
 })
 export class UserService {
 
-  private readonly prefix = `http://localhost:4200/api/user`;
+  private readonly prefix = `/api/user`;
 
   private http = inject(HttpClient);
 
