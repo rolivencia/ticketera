@@ -3,7 +3,7 @@ import * as userService from './user.service'
 
 const router = Router()
 
-router.get('/:id', getById)
+router.get('/id/:id', getById)
 router.get('/email/:email', getByEmail)
 router.post('/', create)
 router.post('/createUserAndSeller', createUserAndSeller)
