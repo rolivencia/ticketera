@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AuthService } from '@auth0/auth0-angular';
+import { Component, inject, input, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { LogoutButtonComponent } from '../logout-button/logout-button.component';
+import { User } from '../../interfaces/user.interface';
 import { RouterModule } from '@angular/router';
 
 @Component({
 	selector: 'ticketera-header',
 	standalone: true,
-	imports: [CommonModule, RouterModule],
+	imports: [CommonModule, LogoutButtonComponent, RouterModule],
 	template: `
 		<a [routerLink]="['']" >
 			<header class="bg-primary-dark">
@@ -19,14 +20,13 @@ import { RouterModule } from '@angular/router';
 			<div
 				class="mx-5 grid max-w-screen-lg grid-cols-2 content-center px-4 py-2 sm:px-6 sm:py-4 md:max-w-screen-lg lg:px-8"
 			>
-				<div class="content-center text-xl">Hola, Lautaro!</div>
+				@if (user()) {
+					<div class="content-center text-xl">Hola, {{ user().firstName }}!</div>
+				}
 				<div class="flex justify-end">
-					<button
-						(click)="onLogoutButtonClicked()"
-						class="bg-danger hover:bg-danger-dark flex rounded px-4 py-2 font-bold text-white"
-					>
-						<span class="">CERRAR SESIÓN</span> <img class="ml-1 h-5" src="/assets/img/icons/logout.svg" alt="" />
-					</button>
+					@if (isPlatformBrowser) {
+						<ticketera-logout-button />
+					}
 				</div>
 			</div>
 		</div>
@@ -34,8 +34,6 @@ import { RouterModule } from '@angular/router';
 	styles: ``,
 })
 export class HeaderComponent {
-	auth0Service = inject(AuthService);
-	onLogoutButtonClicked() {
-		this.auth0Service.logout();
-	}
+	user = input.required<User>();
+	isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 }

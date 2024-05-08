@@ -33,6 +33,6 @@ function getAll(req: Request, res: Response, next: NextFunction) {
 function create(req: Request, res: Response, next: NextFunction) {
     const ticketCreateData = req.body;
     ticketService.create(ticketCreateData)
-        .then(() => res.status(201).send('Ticket created succesfully'))
+        .then((ticket) => res.status(201).send(ticket))
         .catch((err) => next(err));
 }

@@ -3,7 +3,8 @@ import * as userService from './user.service'
 
 const router = Router()
 
-router.get('/:id', getById)
+router.get('/id/:id', getById)
+router.get('/email/:email', getByEmail)
 router.post('/', create)
 router.post('/createUserAndSeller', createUserAndSeller)
 
@@ -12,6 +13,13 @@ export default router
 function getById(req: Request, res: Response, next: NextFunction) {
     const idUser = parseInt(req.params['id'])
     userService.getById(idUser)
+        .then((user => res.status(200).json(user)))
+        .catch((err) => next(err));
+}
+
+function getByEmail(req: Request, res: Response, next: NextFunction) {
+    const { email } = req.params
+    userService.getByEmail(email)
         .then((user => res.status(200).json(user)))
         .catch((err) => next(err));
 }

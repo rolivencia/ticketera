@@ -43,10 +43,11 @@ import { ROUTE_TREE } from '../../app.routes'
 			</table>
 		</div>
 		}
-
-		<button
-			class="bg-success hover:bg-success-dark fixed bottom-4 right-4 rounded-full px-4 py-2 font-bold text-white shadow-lg flex"
-		><img class="h-5 mr-1" src="/assets/img/icons/add.svg" alt="" /> GENERAR ENTRADA</button>
+		<a [routerLink]="['..', appRoute.TICKET_ADD]">
+			<button
+				class="bg-success hover:bg-success-dark fixed bottom-4 right-4 rounded-full px-4 py-2 font-bold text-white shadow-lg flex"
+			><img class="h-5 mr-1" src="/assets/img/icons/add.svg" alt="" /> GENERAR ENTRADA</button>
+		</a>
 	`,
 	styleUrl: './dashboard.component.scss',
 })
