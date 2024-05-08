@@ -10,6 +10,10 @@ export async function getById(id: number) {
     return db.query.user.findFirst({ where: eq(schemas.user.id, id) })
 }
 
+export async function getByEmail(email: string) {
+    return db.query.user.findFirst({ where: eq(schemas.user.email, email) })
+}
+
 export async function create({ firstName, lastName, userName, email }: any) {
     const newUser = {
         firstName: firstName,
@@ -56,7 +60,7 @@ export async function createUserAndSeller({ firstName, lastName, userName, email
         enabled: false,
         deleted: false
     };
-    
+
     const result = await db.transaction(async (trx) => {
         const userInsertResult = await trx.insert(schemas.user).values(newUser).returning();
         if(userInsertResult.length === 0){throw new Error('user cannot be created')}

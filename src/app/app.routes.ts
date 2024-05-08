@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { authorizedGuard } from './guards/authorized.guard';
 
 export const ROUTE_TREE = {
 	DASHBOARD: 'dashboard',
 	TICKET_ADD: 'ticket-add',
 	TICKET_DETAIL: 'ticket-detail',
+	UNAUTHORIZED: 'unauthorized',
 };
 
 export const appRoutes: Routes = [
@@ -19,12 +21,6 @@ export const appRoutes: Routes = [
 				path: ROUTE_TREE.TICKET_ADD,
 				loadComponent: () => import('./pages/ticket-add/ticket-add.component').then((m) => m.TicketAddComponent),
 			},
-			// TODO: Eliminar la ruta generica
-			{
-				path: ROUTE_TREE.TICKET_DETAIL,
-				loadComponent: () =>
-					import('./pages/ticket-detail/ticket-detail.component').then((m) => m.TicketDetailComponent),
-			},
 			{
 				path: `${ROUTE_TREE.TICKET_DETAIL}/:id`,
 				loadComponent: () =>
@@ -36,7 +32,12 @@ export const appRoutes: Routes = [
 				pathMatch: 'full',
 			},
 		],
-		canActivate: [authGuard],
+		canActivate: [authGuard, authorizedGuard],
+	},
+	{
+		path: ROUTE_TREE.UNAUTHORIZED,
+		loadComponent: () => import('./pages/unauthorized/unauthorized.component').then((m) => m.UnauthorizedComponent),
+		pathMatch: 'full',
 	},
 	{
 		path: '**',

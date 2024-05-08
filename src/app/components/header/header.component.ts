@@ -1,12 +1,12 @@
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, inject, input, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { AuthService } from '@auth0/auth0-angular';
-import { LogoutButtonComponent } from '../logout-button/logout-button.component'
+import { LogoutButtonComponent } from '../logout-button/logout-button.component';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
 	selector: 'ticketera-header',
 	standalone: true,
-	imports: [ CommonModule, LogoutButtonComponent ],
+	imports: [CommonModule, LogoutButtonComponent],
 	template: `
 		<header class="bg-primary-dark">
 			<div class="mx-5 max-w-screen-lg px-4 py-4 sm:px-6 sm:py-8 md:max-w-screen-lg lg:px-8">
@@ -17,10 +17,12 @@ import { LogoutButtonComponent } from '../logout-button/logout-button.component'
 			<div
 				class="mx-5 grid max-w-screen-lg grid-cols-2 content-center px-4 py-2 sm:px-6 sm:py-4 md:max-w-screen-lg lg:px-8"
 			>
-				<div class="content-center text-xl">Hola, Lautaro!</div>
+				@if (user()) {
+					<div class="content-center text-xl">Hola, {{ user().firstName }}!</div>
+				}
 				<div class="flex justify-end">
-					@if(isPlatformBrowser){
-						<ticketera-logout-button/>
+					@if (isPlatformBrowser) {
+						<ticketera-logout-button />
 					}
 				</div>
 			</div>
@@ -29,5 +31,6 @@ import { LogoutButtonComponent } from '../logout-button/logout-button.component'
 	styles: ``,
 })
 export class HeaderComponent {
-	isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID))
+	user = input.required<User>();
+	isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 }
