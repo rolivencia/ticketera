@@ -4,8 +4,9 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { TicketService } from 'src/app/providers/ticket.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Ticket } from '../../interfaces/ticket.model';
 
 @Component({
 	selector: 'ticketera-ticket-detail',
@@ -30,14 +31,7 @@ import { environment } from 'src/environments/environment';
 				<qrcode [qrdata]="ticket.qrString" [width]="256" [errorCorrectionLevel]="'M'" class="mx-auto"></qrcode>
 				<p class="text-2xl font-bold">{{ ticket?.lastName?.toUpperCase() }}, {{ ticket?.firstName }}</p>
 				<p class="text-2xl font-bold">{{ ticket?.dni }}</p>
-				<a
-					href="https://api.whatsapp.com/send/?phone=549{{
-						ticket.phone
-					}}&text=Tu+entrada+para+%2AGUALICHO+FEST%2A%0A%0ALink%3A+{{ environment.redirectUri }}/ticket-view/{{
-						ticket.qrString
-					}}&type=phone_number&app_absent=0"
-					target="_blank"
-				>
+				<a [href]="ticket.whatsappUrl" target="_blank">
 					<button
 						class="mt-5 flex w-full justify-center rounded bg-success px-4 py-2 font-bold text-white drop-shadow hover:bg-success-dark"
 					>
@@ -56,8 +50,9 @@ export class TicketDetailComponent {
 	private route = inject(ActivatedRoute);
 	private ticketService = inject(TicketService);
 
-	ticket$ = this.route.params.pipe(
+	ticket$: Observable<Ticket & { whatsappUrl: string }> = this.route.params.pipe(
 		takeUntilDestroyed(),
 		switchMap(({ id }) => this.ticketService.getTicketByID(id)),
+		map((ticket) => ({ ...ticket, whatsappUrl: this.ticketService.generateTicketWhatsappURL(ticket) })),
 	);
 }
