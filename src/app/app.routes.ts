@@ -26,17 +26,18 @@ export const appRoutes: Routes = [
 					import('./pages/ticket-detail/ticket-detail.component').then((m) => m.TicketDetailComponent),
 			},
 			{
-				path: `${ROUTE_TREE.TICKET_VIEW}/:uuid`,
-				loadComponent: () =>
-					import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
-			},
-			{
 				path: '',
 				redirectTo: ROUTE_TREE.DASHBOARD,
 				pathMatch: 'full',
 			},
 		],
 		canActivate: [authGuard],
+		
+	},
+	{
+		path: `${ROUTE_TREE.TICKET_VIEW}/:uuid`,
+		loadComponent: () =>
+			import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
 	},
 	{
 		path: '**',

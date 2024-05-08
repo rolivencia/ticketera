@@ -35,6 +35,7 @@ module.exports = {
 			'gray-900': 'hsl(240, 5%, 14%)',
 			'interactive-500': 'hsl(212, 70%, 45%)',
 			'interactive-600': 'hsl(212, 70%, 35%)',
+			'gualicho-red': '#a83732'
 		},
 		content: {
 			blank: '""',
