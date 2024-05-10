@@ -30,4 +30,8 @@ export class TicketService {
 	generateTicketWhatsappURL(ticket: Ticket): string {
 		return `https://api.whatsapp.com/send/?phone=549${ticket.phone}&text=Tu+entrada+para+%2AGUALICHO+FEST%2A%0A%0ALink%3A+${environment.redirectUri}/ticket-view/${ticket.qrString}&type=phone_number&app_absent=0`;
 	}
+
+	generateTicketQRURL(ticket: Ticket): string {
+		return `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${ticket.qrString}`;
+	}
 }
