@@ -12,6 +12,11 @@ export const ROUTE_TREE = {
 
 export const appRoutes: Routes = [
 	{
+		path: `${ROUTE_TREE.TICKET_VIEW}/:uuid`,
+		loadComponent: () =>
+			import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
+	},
+	{
 		path: '',
 		children: [
 			{
@@ -40,11 +45,6 @@ export const appRoutes: Routes = [
 		loadComponent: () => import('./pages/unauthorized/unauthorized.component').then((m) => m.UnauthorizedComponent),
 		pathMatch: 'full',
 
-	},
-	{
-		path: `${ROUTE_TREE.TICKET_VIEW}/:uuid`,
-		loadComponent: () =>
-			import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
 	},
 	{
 		path: '**',
