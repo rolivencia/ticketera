@@ -20,8 +20,8 @@
 		"sanity:dev": "cd cms && sanity dev",
 		"prepare": "husky",
 		"create-migrations": "pnpm drizzle-kit generate:pg",
-		"run-migrations": "pnpm tsx --env-file=.env run-migrations.ts",
-		"run-migrations-dev": "pnpm tsx run-migrations.ts"
+		"run-migrations": "pnpm tsx run-migrations.ts",
+		"run-migrations-dev": "pnpm tsx --env-file=.env run-migrations.ts"
 	},
 	"private": true,
 	"dependencies": {
