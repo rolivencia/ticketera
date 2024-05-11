@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TicketService } from 'src/app/providers/ticket.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs'
+import { map, switchMap } from 'rxjs'
 import { QRCodeModule } from 'angularx-qrcode';
 
 
@@ -27,7 +27,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 				<div class="text-left">18/05/2024 <br> 23:59</div>
 				<div class="text-right"><span class="font-bold">Casa Grande</span><br>Belgrano 3298, Santa Fe</div>
 			</div>
-			<img class="mx-auto rounded drop-shadow" src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data={{ticket.qrString}}" alt="">
+			<img class="mx-auto rounded drop-shadow" [src]="ticket.qrUrl" alt="">
 			<!--
 				TODO: revisar qrcode para que funcione
 				<qrcode class="mx-auto rounded drop-shadow" [qrdata]="ticket.qrString" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
@@ -48,6 +48,7 @@ export class TicketViewComponent {
 	
 	ticket$ = this.route.params.pipe(
 		takeUntilDestroyed(),
-		switchMap(({ uuid }) => this.ticketService.getTicketByUUID(uuid))
+		switchMap(({ uuid }) => this.ticketService.getTicketByUUID(uuid)),
+		map((ticket) => ({ ...ticket, qrUrl: this.ticketService.generateTicketQRURL(ticket) })),
 	);
 }
