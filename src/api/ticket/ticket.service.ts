@@ -1,4 +1,5 @@
 import * as schemas from '../schemas/ticket';
+import * as sellerService from '../seller/seller.service';
 import { pgClient } from '../_helpers/postgres-connector'
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { eq } from 'drizzle-orm'
@@ -18,6 +19,10 @@ export async function getAll() {
 }
 
 export async function create({ cost, firstName, lastName, email, phone, dni, createdBy }: any) {
+    console.log({ cost, firstName, lastName, email, phone, dni, createdBy });
+
+    const seller = await sellerService.getByUserId(createdBy);
+
     const newTicket = {
         cost: cost,
         firstName: firstName,
@@ -30,7 +35,7 @@ export async function create({ cost, firstName, lastName, email, phone, dni, cre
         updatedAt: new Date(),
         enabled: false,
         deleted: false,
-        createdBy: createdBy
+        createdBy: seller?.id ?? 0
     }
 
     const res = await db.insert(schemas.ticket).values(newTicket).returning();

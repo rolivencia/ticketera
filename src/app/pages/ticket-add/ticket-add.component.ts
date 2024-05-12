@@ -6,6 +6,8 @@ import { Ticket } from 'src/app/interfaces/ticket.model';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { first } from 'rxjs'
+import { UserService } from '../../providers/user.service'
+import { AuthenticationService } from '../../providers/authentication.service'
 
 @Component({
 	selector: 'ticketera-ticket-add',
@@ -106,6 +108,7 @@ export class TicketAddComponent implements OnInit {
 	private formBuilder = inject(FormBuilder);
 	private router = inject(Router);
 	private ticketService = inject(TicketService);
+	private authenticationService = inject(AuthenticationService);
 
 	ngOnInit(): void {
 		this.ticketForm = this.formBuilder.group({
@@ -118,13 +121,23 @@ export class TicketAddComponent implements OnInit {
 
 	onSubmit() {
 		if (this.ticketForm?.valid) {
+
+			const user = this.authenticationService.currentUser$.value ?? null;
+
+			console.log(user);
+
+			if(!user){
+				console.error('Usuario no encontrado');
+				return;
+			}
+
 			const tk: Ticket = {
 				firstName: this.ticketForm.value.firstName,
 				lastName: this.ticketForm.value.lastName,
 				dni: this.ticketForm.value.dni,
 				phone: this.ticketForm.value.phone,
 				cost: 1800,
-				createdBy: 3,
+				createdBy: user.id,
 				id: 0,
 				qrString: '',
 				email: '',

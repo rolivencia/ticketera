@@ -8,3 +8,7 @@ const db = drizzle(pgClient, { schema: { ...schemas } });
 export async function getById(id: number) {
     return db.query.seller.findFirst({ where: eq(schemas.seller.id, id) })
 }
+
+export async function getByUserId(idUser: number) {
+    return db.query.seller.findFirst({ where: eq(schemas.seller.idUser, idUser) })
+}
