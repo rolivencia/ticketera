@@ -26,6 +26,6 @@ export class UserService {
       userName: user.nickname,
       email: user.email,
     }
-    return this.http.post<User>(`${this.prefix}`, body)
+    return this.http.post<User>(`${this.prefix}/createUserAndSeller`, body)
   }
 }
