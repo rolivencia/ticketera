@@ -4,11 +4,19 @@ import * as ticketService from './ticket.service'
 const router = Router()
 
 router.post('/', create)
+router.put('/redeem', redeem)
 router.get('/:id', getById)
 router.get('/uuid/:uuid', getByUUID)
 router.get('/', getAll)
 
 export default router
+
+function redeem(req: Request, res: Response, next: NextFunction) {
+    const { uuid } = req.body;
+    ticketService.redeem(uuid)
+        .then(() => res.status(200).send())
+        .catch((err) => next(err))
+}
 
 function getById(req: Request, res: Response, next: NextFunction) {
     const idTicket = parseInt(req.params['id'])
