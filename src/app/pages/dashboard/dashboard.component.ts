@@ -10,6 +10,11 @@ import { ROUTE_TREE } from '../../app.routes'
 	standalone: true,
 	imports: [ CommonModule, RouterLink ],
 	template: `
+		<a [routerLink]="['..', appRoute.TICKET_REDEEM]">
+			<button
+				class="bg-success hover:bg-success-dark rounded-full px-4 py-2 font-bold text-white shadow-lg flex"
+			>CANJEAR ENTRADAS</button>
+		</a>
 		@if(tickets$ | async; as tickets){
 		<div class="m-5 grid rounded bg-white p-5 text-center drop-shadow">
 			<span class="text-5xl font-bold text-success">{{ tickets.length }}</span>

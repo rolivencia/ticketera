@@ -7,7 +7,8 @@ export const ROUTE_TREE = {
 	TICKET_ADD: 'ticket-add',
 	TICKET_DETAIL: 'ticket-detail',
 	UNAUTHORIZED: 'unauthorized',
-	TICKET_VIEW: 'ticket-view'
+	TICKET_VIEW: 'ticket-view',
+	TICKET_REDEEM: 'ticket-redeem'
 };
 
 export const appRoutes: Routes = [
@@ -31,6 +32,10 @@ export const appRoutes: Routes = [
 				path: `${ROUTE_TREE.TICKET_DETAIL}/:id`,
 				loadComponent: () =>
 					import('./pages/ticket-detail/ticket-detail.component').then((m) => m.TicketDetailComponent),
+			},
+			{
+				path: ROUTE_TREE.TICKET_REDEEM,
+				loadComponent: () => import('./pages/ticket-redeem/ticket-redeem.component').then((m) => m.TicketRedeemComponent),
 			},
 			{
 				path: '',
