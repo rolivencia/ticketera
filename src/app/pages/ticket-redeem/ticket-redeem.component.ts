@@ -12,13 +12,20 @@ import { FormsModule } from "@angular/forms";
   template: `
       <zxing-scanner (scanSuccess)="onScanSuccess($event)">
       </zxing-scanner>
+      @if(uuid) {
+        <h1>UUID: {{ uuid }}</h1>
+      }
   `,
   styleUrl: './ticket-redeem.component.scss'
 })
 export class TicketRedeemComponent {
 
+  uuid: string = '';
+
 onScanSuccess($event: string) {
   console.log($event);
+  alert($event);
+  this.uuid = $event;
 }
 
 
