@@ -13,6 +13,10 @@ export const ROUTE_TREE = {
 
 export const appRoutes: Routes = [
 	{
+		path: ROUTE_TREE.TICKET_REDEEM,
+		loadComponent: () => import('./pages/ticket-redeem/ticket-redeem.component').then((m) => m.TicketRedeemComponent),
+	},
+	{
 		path: `${ROUTE_TREE.TICKET_VIEW}/:uuid`,
 		loadComponent: () =>
 			import('./pages/ticket-view/ticket-view.component').then((m) => m.TicketViewComponent),
@@ -32,10 +36,6 @@ export const appRoutes: Routes = [
 				path: `${ROUTE_TREE.TICKET_DETAIL}/:id`,
 				loadComponent: () =>
 					import('./pages/ticket-detail/ticket-detail.component').then((m) => m.TicketDetailComponent),
-			},
-			{
-				path: ROUTE_TREE.TICKET_REDEEM,
-				loadComponent: () => import('./pages/ticket-redeem/ticket-redeem.component').then((m) => m.TicketRedeemComponent),
 			},
 			{
 				path: '',
