@@ -41,3 +41,28 @@ export async function create({ cost, firstName, lastName, email, phone, dni, cre
     const res = await db.insert(schemas.ticket).values(newTicket).returning();
     return res;
 }
+
+export async function redeem(uuid: string) {
+    const ticket = await getByUUID(uuid);
+    if (!ticket) {
+        throw new Error('No se encontró el ticket!');
+    }
+
+    if (ticket.enabled) {
+        throw new Error('El ticket ya se redimió!');
+    }
+
+    const updatedTicket = {
+        ...ticket,
+        enabled: true,
+        updatedAt: new Date()
+    }
+
+    const result =
+        await db
+            .update(schemas.ticket)
+            .set(updatedTicket)
+            .where(eq(schemas.ticket.id, ticket.id))
+            .returning();
+    return result;
+}
