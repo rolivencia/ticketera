@@ -75,13 +75,13 @@ import { first } from 'rxjs';
           </zxing-scanner>
         </div>
 
-        <div class="mt-5">
+        <div class="mt-5 p-3">
           <label for="HeadlineAct" class="block text-sm font-medium text-gray-900"> Seleccionar cámara </label>
 
           <select
               name="HeadlineAct"
               id="HeadlineAct"
-              class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+              class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm p-3"
               (change)="onSelectedDeviceChanged($event.target)"
           >
             @for(device of availableDevices; track $index){
