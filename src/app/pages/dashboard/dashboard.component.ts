@@ -10,6 +10,11 @@ import { ROUTE_TREE } from '../../app.routes'
 	standalone: true,
 	imports: [ CommonModule, RouterLink ],
 	template: `
+		<a [routerLink]="['..', appRoute.TICKET_REDEEM]">
+			<button
+				class="bg-success hover:bg-success-dark mx-auto rounded-full px-4 py-2 font-bold text-white shadow-lg flex"
+			>CANJEAR ENTRADAS</button>
+		</a>
 		@if(tickets$ | async; as tickets){
 		<div class="m-5 grid rounded bg-white p-5 text-center drop-shadow">
 			<span class="text-5xl font-bold text-success">{{ tickets.length }}</span>
@@ -32,7 +37,7 @@ import { ROUTE_TREE } from '../../app.routes'
 					<tr *ngFor="let ticket of tickets">
 						<td class="whitespace-nowrap px-4 py-5 font-medium text-gray-900">#{{ ticket.id }}</td>
 						<td class="whitespace-nowrap px-4 py-5 text-gray-700">{{ ticket.lastName }}, {{ ticket.firstName }}</td>
-						<td class="flex justify-between whitespace-nowrap px-4 py-5">
+						<td class="flex justify-between whitespace-nowrap px-4 py-5 min-w-[100px]">
 							<a [routerLink]="['..', appRoute.TICKET_DETAIL, ticket.id]"><img class="h-5" src="/assets/img/icons/qr-code.svg" alt=""/></a>
 							<a [routerLink]="['..', appRoute.TICKET_VIEW, ticket.qrString]"><img class="h-5" src="/assets/img/icons/ticket.svg" alt=""/></a>
 							<img class="h-5" src="/assets/img/icons/whatsapp.svg" alt="" />

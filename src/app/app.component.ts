@@ -17,7 +17,7 @@ import { User } from './interfaces/user.interface';
 		@if (user$ | async; as user) {
 			<ticketera-header [user]="user" />
 		}
-		<div class="mx-5 max-w-screen-lg px-4 py-4 sm:px-6 sm:py-8 md:max-w-screen-lg lg:px-8">
+		<div class="md:mx-5 max-w-screen-lg md:px-4 py-4 sm:py-8 md:max-w-screen-lg lg:px-8">
 			<router-outlet />
 		</div>
 	`,

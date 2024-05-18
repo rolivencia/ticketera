@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable, switchMap } from 'rxjs';
 import { Ticket } from '../interfaces/ticket.model';
 import { environment } from '../../environments/environment';
+import { ticket } from 'src/api/schemas/ticket';
 
 @Injectable({
 	providedIn: 'root',
@@ -33,5 +34,9 @@ export class TicketService {
 
 	generateTicketQRURL(ticket: Ticket): string {
 		return `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${ticket.qrString}`;
+	}
+
+	redeemTicket(ticket: Ticket) {
+		return this.http.put<Ticket>(`${this.prefix}/redeem`, ticket);
 	}
 }

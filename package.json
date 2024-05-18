@@ -39,6 +39,7 @@
 		"@nx/angular": "18.2.3",
 		"@types/cors": "^2.8.17",
 		"@types/express": "^4.17.17",
+		"@zxing/ngx-scanner": "^17.0.3",
 		"angularx-qrcode": "^17.0.0",
 		"body-parser": "^1.20.2",
 		"cors": "^2.8.5",
