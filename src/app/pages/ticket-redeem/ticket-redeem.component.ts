@@ -68,9 +68,29 @@ import { first } from 'rxjs';
       @if(!ticket){
         <div>
           <zxing-scanner
-          class="mx-auto h-[300px]"
+          class="mx-auto"
+          [(device)]="selectedDevice"
+          (camerasFound)="onCamerasFound($event)"
           (scanSuccess)="onScanSuccess($event)">
           </zxing-scanner>
+        </div>
+
+        <div class="mt-5">
+          <label for="HeadlineAct" class="block text-sm font-medium text-gray-900"> Seleccionar cámara </label>
+
+          <select
+              name="HeadlineAct"
+              id="HeadlineAct"
+              class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+              (change)="onSelectedDeviceChanged($event.target)"
+          >
+            @for(device of availableDevices; track $index){
+              <option
+                  [value]="device.deviceId"
+                  [selected]="selectedDevice && device.deviceId === selectedDevice.deviceId"
+              >{{ device.label }}</option>
+            }
+          </select>
         </div>
       }
 
@@ -111,6 +131,9 @@ export class TicketRedeemComponent {
   error: string | undefined;
   reedemedTicket: Ticket | undefined;
 
+  availableDevices: MediaDeviceInfo[] = []
+  selectedDevice: MediaDeviceInfo | undefined;
+
   onScanSuccess(uuid: string) {
     this.reedemedTicket = undefined;
     this.isLoading = true;
@@ -118,6 +141,16 @@ export class TicketRedeemComponent {
       this.isLoading = false;
       this.ticket = result;
     })
+  }
+
+  onCamerasFound($event: MediaDeviceInfo[]){
+    this.availableDevices = $event;
+    this.selectedDevice = this.availableDevices[0];
+  }
+
+  onSelectedDeviceChanged($event: any){
+    const deviceId = $event.value;
+    this.selectedDevice = this.availableDevices.filter(device => device.deviceId === deviceId)[0];
   }
 
   redeem(ticket: Ticket){
@@ -133,6 +166,6 @@ export class TicketRedeemComponent {
     })
   }
 
-  
+
 
 }
