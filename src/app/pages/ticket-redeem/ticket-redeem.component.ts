@@ -112,6 +112,7 @@ export class TicketRedeemComponent {
   reedemedTicket: Ticket | undefined;
 
   onScanSuccess(uuid: string) {
+    this.reedemedTicket = undefined;
     this.isLoading = true;
     this.ticketService.getTicketByUUID(uuid).subscribe((result) => {
       this.isLoading = false;
